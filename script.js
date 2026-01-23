@@ -124,4 +124,106 @@ dropdownLinks.forEach((link) => {
   
     dot.classList.toggle("active", item.id === entry.target.id);
   });
-  
+  /* ---------- JOURNAL MONTH SLIDESHOW ---------- */
+document.querySelectorAll(".month-card").forEach((card) => {
+  const imageBox = card.querySelector(".month-image");
+  const images = card.dataset.images.split(",").map(img => img.trim());
+  let index = 0;
+
+  imageBox.style.backgroundImage = `url(${images[0]})`;
+
+  setInterval(() => {
+    index = (index + 1) % images.length;
+    imageBox.style.backgroundImage = `url(${images[index]})`;
+  }, 3000); // change every 3 seconds
+});
+document.querySelectorAll(".month-card").forEach((card) => {
+  const images = card.dataset.images.split(",").map(i => i.trim());
+  const imageBox = card.querySelector(".month-image");
+  const prevBtn = card.querySelector(".prev");
+  const nextBtn = card.querySelector(".next");
+
+  let index = 0;
+
+  // set first image immediately
+  imageBox.style.backgroundImage = `url(${images[0]})`;
+
+  function changeImage(newIndex) {
+    imageBox.style.opacity = 0;
+
+    setTimeout(() => {
+      index = newIndex;
+      imageBox.style.backgroundImage = `url(${images[index]})`;
+      imageBox.style.opacity = 1;
+    }, 200);
+  }
+
+  nextBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    changeImage((index + 1) % images.length);
+  });
+
+  prevBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    changeImage((index - 1 + images.length) % images.length);
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const items = document.querySelectorAll(".timeline-item");
+
+  if (!items.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+    }
+  );
+
+  items.forEach((item) => observer.observe(item));
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const items = document.querySelectorAll(".timeline-item");
+  if (!items.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  items.forEach((item) => observer.observe(item));
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const items = document.querySelectorAll(".timeline-item");
+  if (!items.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+
+          items.forEach((item) => item.classList.remove("active"));
+          entry.target.classList.add("active");
+        }
+      });
+    },
+    {
+      threshold: 0.6,
+    }
+  );
+
+  items.forEach((item) => observer.observe(item));
+});
