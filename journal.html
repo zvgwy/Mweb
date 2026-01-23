@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journal</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+
+
+<body>
+
+<!-- HEADER (same as other pages) -->
+<header class="site-header">
+  <div class="header-logo">
+    <a href="index.html">
+      <img src="logo.png" alt="Logo" />
+    </a>
+  </div>
+
+  <nav class="header-nav">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+
+    <div class="dropdown">
+      <a href="addu.html" class="dropdown-trigger">Life in AdDU</a>
+      <div class="dropdown-menu">
+        <a href="addu.html#year1">Year 1</a>
+        <a href="addu.html#year2">Year 2</a>
+        <a href="addu.html#year3">Year 3</a>
+        <a href="addu.html#year4">Year 4</a>
+      </div>
+    </div>
+
+    <div class="dropdown journal-dropdown">
+        <a href="journal.html" class="dropdown-trigger">Journal</a>
+        <div class="dropdown-menu">
+          <a href="journal-jan.html">January</a>
+          <a href="journal-feb.html">February</a>
+          <a href="journal-mar.html">March</a>
+          <a href="journal-apr.html">April</a>
+        </div>
+      </div>
+      
+  </nav>
+</header>
+<section class="hero journal-hero">
+    <h1>Journal.</h1>
+    <p class="journal-subtitle">
+        This journal serves as a record book of my senior year in college. 
+        It highlights my core experiences and growth as I transition from being a student to a professional.
+    </p>
+  </section>
+  
+<!-- JOURNAL ENTRIES -->
+<section class="journal-menu">
+
+    <article class="month-card" data-images="pix/January/Week_1_1.jpeg,pix/January/Week_1_2.jpg,pix/January/Week_1_3.jpg,pix/January/Week_1_4.jpg,pix/January/Week_1_5.jpg">
+        <div class="month-slider">
+          <div class="month-image"></div>
+      
+          <div class="month-overlay">
+            <a href="journal-jan.html" class="month-title">January</a>
+          </div>
+          <button class="nav-btn prev">‹</button>
+          <button class="nav-btn next">›</button>
+        </div>
+      </article>      
+      
+        </div>
+      </article>
+      
+  
+      <article class="month-card" data-images="y1-acad-1.jpg,y2-acad-2.jpg">
+        <div class="month-slider">
+          <div class="month-image"></div>
+      
+          <div class="month-overlay">
+            <a href="journal-feb.html" class="month-title">February</a>
+          </div>
+      
+          <button class="nav-btn prev">‹</button>
+          <button class="nav-btn next">›</button>
+        </div>
+      </article>
+      
+
+      <article class="month-card" data-images="y1-acad-1.jpg,y2-acad-2.jpg,y2-org-2.jpg">
+        <div class="month-slider">
+          <div class="month-image"></div>
+      
+          <div class="month-overlay">
+            <a href="journal-mar.html" class="month-title">March</a>
+          </div>
+      
+          <button class="nav-btn prev">‹</button>
+          <button class="nav-btn next">›</button>
+        </div>
+      </article>
+      
+  
+      <article class="month-card" data-images="y1-acad-1.jpg,y2-acad-2.jpg">
+        <div class="month-slider">
+          <div class="month-image"></div>
+      
+          <div class="month-overlay">
+            <a href="journal-apr.html" class="month-title">April</a>
+          </div>
+      
+          <button class="nav-btn prev">‹</button>
+          <button class="nav-btn next">›</button>
+        </div>
+      </article>
+      
+  
+  </section>
+  
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="journal-link">Back to Home</a>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cards = document.querySelectorAll(".month-card");
+    
+      if (!cards.length) return; // prevents JS crashes
+    
+      cards.forEach((card) => {
+        const images = card.dataset.images.split(",").map(i => i.trim());
+        const imageBox = card.querySelector(".month-image");
+        const prevBtn = card.querySelector(".prev");
+        const nextBtn = card.querySelector(".next");
+    
+        let index = 0;
+    
+        // initial image
+        imageBox.style.backgroundImage = `url(${images[index]})`;
+    
+        function changeImage(newIndex) {
+          imageBox.style.opacity = 0;
+    
+          setTimeout(() => {
+            index = newIndex;
+            imageBox.style.backgroundImage = `url(${images[index]})`;
+            imageBox.style.opacity = 1;
+          }, 200);
+        }
+    
+        nextBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          changeImage((index + 1) % images.length);
+        });
+    
+        prevBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          changeImage((index - 1 + images.length) % images.length);
+        });
+      });
+    });
+    </script>
+    
+</body>
+</html>
