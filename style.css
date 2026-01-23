@@ -237,10 +237,12 @@
     }
   }
   /* ---------- DROPDOWN ---------- */
-.dropdown {
+  .dropdown {
     position: relative;
-    display: contents;
-  }
+    display: inline-flex;
+    align-items: center;
+  }  
+  
   
   .dropdown::after {
     content: "";
@@ -265,25 +267,29 @@
   .dropdown-menu {
     position: absolute;
     top: 140%;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+  
     background-color: #0e0e0e;
     padding: 1rem 0;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    min-width: 180px;
+    min-width: 160px;
+  
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-6px);
     transition: opacity 0.25s ease, transform 0.25s ease;
   }
   
+  
   .dropdown-menu a {
-    padding: 0 1.5rem;
     font-size: 0.7rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #888;
+    text-align: center;
+    padding: 0.2rem 1.5rem;
   }
   
   .dropdown-menu a:hover {
@@ -301,6 +307,18 @@
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
+  
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown.open .dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-trigger::after {
+  display: none;
 }
 
   /* ---------- SOCIAL LINKS ---------- */
@@ -608,4 +626,297 @@
     padding-bottom: 0rem;
   }
   
-      
+  /* ---------- JOURNAL PAGE ---------- */
+.journal-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.journal-hero h1 {
+  font-family: inherit; /* SAME as Life in AdDU */
+  font-size: clamp(4rem, 10vw, 7rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.2rem;
+}
+
+.journal-subtitle {
+  max-width: 560px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #bcbcbc;
+}
+
+/* ---------- ENTRIES ---------- */
+.journal-entries {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.journal-entry {
+  padding: 3rem 0;
+  border-top: 1px solid #1f1f1f;
+}
+
+.journal-entry:first-child {
+  border-top: none;
+}
+
+.entry-date {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #777;
+}
+
+.entry-title {
+  margin: 0.8rem 0 0.6rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.entry-excerpt {
+  color: #bcbcbc;
+  line-height: 1.7;
+}
+/* ---------- JOURNAL ENTRY IMAGE ---------- */
+.entry-image {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 1.2rem;
+  display: block;
+}
+.entry-image {
+  opacity: 0.9;
+  filter: grayscale(20%);
+}
+
+/* ---------- JOURNAL MENU ---------- */
+.journal-menu {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 3rem;
+}
+
+/* ---------- MONTH CARD ---------- */
+.month-card {
+  width: 100%;
+}
+
+/* ---------- SLIDER ---------- */
+.month-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+/* IMAGE */
+.month-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+/* GRADIENT */
+.month-slider::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.6)
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* TEXT */
+.month-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.month-title {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+
+
+/* ARROWS */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.3s ease, background 0.3s ease;
+}
+
+.nav-btn.prev { left: 12px; }
+.nav-btn.next { right: 12px; }
+
+.month-slider:hover .nav-btn {
+  opacity: 1;
+}
+/* ---------- VIGNETTE HOVER ---------- */
+.month-slider::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.month-slider:hover::before {
+  opacity: 1;
+}
+.month-title {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.month-slider:hover .month-title {
+  transform: translateY(-2px);
+}
+/* ---------- MONTH HERO ---------- */
+.month-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.month-hero h1 {
+  font-size: clamp(5rem, 12vw, 9rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.month-subtitle {
+  max-width: 600px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #bcbcbc;
+}
+/* ---------- MONTH TIMELINE ---------- */
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-left: 2rem;
+  margin-top: 6rem;
+  }
+  
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8px;
+  width: 1px;
+  height: 100%;
+  background-color: #1f1f1f;
+}
+
+/* ---------- TIMELINE SCROLL ANIMATION ---------- */
+.timeline-item {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.timeline-content {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.timeline-text h2 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0.8rem 0;
+}
+
+.timeline-text p {
+  color: #bcbcbc;
+  line-height: 1.7;
+}
+
+.timeline-image img {
+  width: 100%;
+  border-radius: 6px;
+  display: block;
+  opacity: 0.95;
+}
+
+/* ---------- ACTIVE TIMELINE ENTRY ---------- */
+.timeline-item {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+}
+
+/* Active entry moves closer */
+.timeline-item.active {
+  transform: translateY(-12px);
+}
+
+/* Non-active entries feel quieter */
+.timeline-item.visible:not(.active) {
+  opacity: 0.85;
+}
+
