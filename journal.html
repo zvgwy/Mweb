@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journal</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+  <link rel="icon" href="pix/Abt/logo.png" type="image/png" />
+</head>
+<body>
+<header class="site-header">
+    <div class="header-logo">
+        <a href="index.html">
+          <img src="pix/Abt/logo.png" alt="Logo" />
+        </a>
+      </div>
+      
+
+      <nav class="header-nav">
+        <a href="index.html">Home</a>
+      
+        <a href="index.html#about">About</a>
+      
+        <div class="dropdown">
+          <a href="addu.html" class="dropdown-trigger">Life in AdDU</a>
+          <div class="dropdown-menu">
+            <a href="addu.html#year1" data-year="year1">Year 1</a>
+            <a href="addu.html#year2" data-year="year2">Year 2</a>
+            <a href="addu.html#year3" data-year="year3">Year 3</a>
+            <a href="addu.html#year4" data-year="year4">Year 4</a>
+          </div>
+        </div>
+      
+        <div class="dropdown">
+          <a href="activities.html" class="dropdown-trigger">Activities</a>
+          <div class="dropdown-menu">
+            <a href="activities.html#activity1">Activity 1</a>
+            <a href="activities.html#activity2">Activity 2</a>
+          </div>
+        </div>
+      
+        <div class="dropdown journal-dropdown">
+          <a href="journal.html" class="dropdown-trigger">Journal</a>
+          <div class="dropdown-menu">
+            <a href="journals/journal-first.html">First</a>
+            <a href="journals/journal-third.html">Third</a>
+            <a href="journals/journal-fourth.html">Fourth</a>
+          </div>
+        </div>
+        
+      </nav>
+      
+</header>
+<section class="hero journal-hero">
+    <h1>Journal.</h1>
+    <p class="journal-subtitle">
+        This journal serves as a record book of my senior year in college. 
+        It highlights my core experiences and growth as I transition from being a student to a professional.
+    </p>
+  </section>
+  
+<section class="journal-menu">
+
+    <article class="month-card" data-images="pix/Journals/first/Week_1_1.jpeg,pix/Journals/first/Week_1_2.jpg,pix/Journals/first/Week_1_3.jpg,pix/Journals/first/Week_1_4.jpg,pix/Journals/first/Week_1_5.jpg">
+        <div class="month-slider">
+          <div class="month-image"></div>
+      
+          <div class="month-overlay">
+            <a href="journals/journal-first.html" class="month-title">First</a>
+          </div>
+          <button class="nav-btn prev">&lsaquo;</button>
+          <button class="nav-btn next">&rsaquo;</button>
+        </div>
+      </article>      
+      
+        </div>
+      </article>
+
+      <article class="month-card" data-images="pix/Journals/third/J3_Q1.jpg,pix/Journals/third/J3_Q2.jpg,pix/Journals/third/J3_Q3.jpg">
+        <div class="month-slider">
+          <div class="month-image"></div>
+      
+          <div class="month-overlay">
+            <a href="journals/journal-third.html" class="month-title">Third</a>
+          </div>
+      
+          <button class="nav-btn prev">&lsaquo;</button>
+          <button class="nav-btn next">&rsaquo;</button>
+        </div>
+      </article>
+      
+      <article class="month-card" data-images="pix/Journals/fourth/J4_Q1.jpg,pix/Journals/fourth/J4_Q2.jpg,pix/Journals/fourth/J4_Q3.jpg,pix/Journals/fourth/J4_Q4.jpg">
+        <div class="month-slider">
+          <div class="month-image"></div>
+      
+          <div class="month-overlay">
+            <a href="journals/journal-fourth.html" class="month-title">Fourth</a>
+          </div>
+      
+          <button class="nav-btn prev">&lsaquo;</button>
+          <button class="nav-btn next">&rsaquo;</button>
+        </div>
+      </article>
+  </section>
+<footer>
+  <a href="index.html" class="journal-link">Back to Home</a>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cards = document.querySelectorAll(".month-card");
+    
+      if (!cards.length) return;
+    
+      cards.forEach((card) => {
+        const images = card.dataset.images.split(",").map(i => i.trim());
+        const imageBox = card.querySelector(".month-image");
+        const prevBtn = card.querySelector(".prev");
+        const nextBtn = card.querySelector(".next");
+    
+        let index = 0;
+        imageBox.style.backgroundImage = `url(${images[index]})`;
+    
+        function changeImage(newIndex) {
+          imageBox.style.opacity = 0;
+    
+          setTimeout(() => {
+            index = newIndex;
+            imageBox.style.backgroundImage = `url(${images[index]})`;
+            imageBox.style.opacity = 1;
+          }, 200);
+        }
+    
+        nextBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          changeImage((index + 1) % images.length);
+        });
+    
+        prevBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          changeImage((index - 1 + images.length) % images.length);
+        });
+      });
+    });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
