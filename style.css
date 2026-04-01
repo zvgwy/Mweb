@@ -1021,4 +1021,63 @@ body {
   color: #e6e6e6;
 }
 
+.outro-note p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.00 rem;
+  line-height: 1.9;
+  color: #e6e6e6;
+}
+
+/* Activities - Giftedness table */
+.giftedness-table-container {
+  overflow-x: auto;
+}
+
+.giftedness-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: 1px solid #2c2c2c;
+  background: #0d0d0d;
+}
+
+.giftedness-table th,
+.giftedness-table td {
+  border: 1px solid #2c2c2c;
+  padding: 1rem 1.1rem;
+  vertical-align: top;
+}
+
+.giftedness-table thead th {
+  background: #151515;
+  font-weight: 700;
+  text-align: center;
+}
+
+.giftedness-table .row-label {
+  width: 130px;
+  font-weight: 700;
+  background: #121212;
+  white-space: nowrap;
+}
+
+.giftedness-table ul {
+  margin: 0;
+  padding-left: 1.3rem;
+}
+
+.giftedness-table li + li {
+  margin-top: 0.25rem;
+}
+
+.giftedness-table tbody tr:nth-child(even) td {
+  background: #101010;
+}
+
+@media (max-width: 768px) {
+  .giftedness-table {
+    min-width: 760px;
+  }
+}
 
