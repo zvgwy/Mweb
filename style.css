@@ -1080,4 +1080,18 @@ body {
     min-width: 760px;
   }
 }
+.final-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
 
+.final-gallery img {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 8px;
+  display: block;
+  object-fit: cover;
+  opacity: 0.95;
+}
